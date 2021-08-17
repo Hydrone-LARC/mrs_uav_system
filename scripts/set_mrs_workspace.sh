@@ -42,14 +42,14 @@ ln -sf ~/git/simulation
 
 cd $WORKSPACE_PATH
 source /opt/ros/$ROS_DISTRO/setup.bash
-[ -z "$GITHUB_CI" ] && command catkin build mavros -c --mem-limit 75%
-[ ! -z "$GITHUB_CI" ] && command catkin build mavros --limit-status-rate 0.2 --summarize
-[ -z "$GITHUB_CI" ] && command catkin build mavlink_sitl_gazebo -c --mem-limit 75%
-[ ! -z "$GITHUB_CI" ] && command catkin build mavlink_sitl_gazebo --limit-status-rate 0.2 --summarize
-[ -z "$GITHUB_CI" ] && command catkin build mrs_gazebo_common_resources -c --mem-limit 75%
-[ ! -z "$GITHUB_CI" ] && command catkin build mrs_gazebo_common_resources --limit-status-rate 0.2 --summarize
-[ -z "$GITHUB_CI" ] && command catkin build -c --mem-limit 75%
-[ ! -z "$GITHUB_CI" ] && command catkin build --limit-status-rate 0.2 --summarize
+[ -z "$GITHUB_CI" ] && command catkin build -j2 mavros -c --mem-limit 75%
+[ ! -z "$GITHUB_CI" ] && command catkin build -j2 mavros --limit-status-rate 0.2 --summarize
+[ -z "$GITHUB_CI" ] && command catkin build -j2 mavlink_sitl_gazebo -c --mem-limit 75%
+[ ! -z "$GITHUB_CI" ] && command catkin build -j2 mavlink_sitl_gazebo --limit-status-rate 0.2 --summarize
+[ -z "$GITHUB_CI" ] && command catkin build -j2 mrs_gazebo_common_resources -c --mem-limit 75%
+[ ! -z "$GITHUB_CI" ] && command catkin build -j2 mrs_gazebo_common_resources --limit-status-rate 0.2 --summarize
+[ -z "$GITHUB_CI" ] && command catkin build -j2 -c --mem-limit 75%
+[ ! -z "$GITHUB_CI" ] && command catkin build -j2 --limit-status-rate 0.2 --summarize
 
 num=`cat ~/.bashrc | grep "$WORKSPACE_PATH" | wc -l`
 if [ "$num" -lt "1" ]; then
